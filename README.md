@@ -18,10 +18,15 @@ Treat the source and sinks as having pipe openings at all of their edges. For ex
 A sink may be connected to the source through another sink. For example, in the simple pipe system '* ╦ X Y ═ Z', all three sinks are connected to the source.
 
 Your objective is to write a function that determines which sinks are connected to the source in a given pipe system.
+
+
 <img width="108" alt="image" src="https://github.com/Nicoule/Cutie-Pipe-System/assets/130537195/6517458d-2af8-4b62-b351-bcdce2e27605">
+
 
 Example: This pipe System connects the Sourse with two Sinks "A" and "B". The input used is as follows.
 
+
 <img width="60" alt="image" src="https://github.com/Nicoule/Cutie-Pipe-System/assets/130537195/26e8568e-555c-47e4-ad3b-003facd98b3b">
+
 
 Now, please download the pipe_input.txt and test your code. It's a more complicated pipe system. The output should be like ['A', 'B', 'C']. Wish you luck!
