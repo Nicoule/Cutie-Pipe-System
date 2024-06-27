@@ -1,0 +1,107 @@
+def read_input(file_path):
+    with open(file_path, 'r') as file:
+        lines = file.readlines()
+
+    max_row = 0
+    max_col = 0
+    pipes = []
+
+    for line in lines:
+        parts = line.strip().split()
+        if len(parts) == 3:
+            char, col, row = parts[0], int(parts[1]), int(parts[2])
+            pipes.append((char, col, row))
+            max_row = max(max_row, row)
+            max_col = max(max_col, col)
+
+    # Create an empty grid
+    grid = [[' ' for _ in range(max_col + 1)] for _ in range(max_row + 1)]
+
+    for char, col, row in pipes:
+        grid[row][col] = char
+
+    return grid
+
+def get_connected_sinks(grid):
+    from collections import deque
+
+    # Define the possible connections for each type of pipe
+    pipe_connections = {
+        '═': {'right': True, 'left': True, 'up': False, 'down': False},
+        '║': {'right': False, 'left': False, 'up': True, 'down': True},
+        '╔': {'right': True, 'left': False, 'up': False, 'down': True},
+        '╗': {'right': False, 'left': True, 'up': False, 'down': True},
+        '╚': {'right': True, 'left': False, 'up': True, 'down': False},
+        '╝': {'right': False, 'left': True, 'up': True, 'down': False},
+        '╠': {'right': True, 'left': False, 'up': True, 'down': True},
+        '╣': {'right': False, 'left': True, 'up': True, 'down': True},
+        '╦': {'right': True, 'left': True, 'up': False, 'down': True},
+        '╩': {'right': True, 'left': True, 'up': True, 'down': False},
+        '*': {'right': True, 'left': True, 'up': True, 'down': True},  # Source
+    }
+
+    # Add sink connections (all directions)
+    for letter in "ABCDEFGHIJKLMNOPQRSTUVWXYZ":
+        pipe_connections[letter] = {'right': True, 'left': True, 'up': True, 'down': True}
+    
+    rows, cols = len(grid), len(grid[0])
+    visited = [[False] * cols for _ in range(rows)]
+    
+    def in_bounds(x, y):
+        return 0 <= x < rows and 0 <= y < cols
+    
+    def can_connect(from_cell, to_cell, direction):
+        if from_cell not in pipe_connections or to_cell not in pipe_connections:
+            return False
+        if direction == 'right':
+            return pipe_connections[from_cell]['right'] and pipe_connections[to_cell]['left']
+        elif direction == 'left':
+            return pipe_connections[from_cell]['left'] and pipe_connections[to_cell]['right']
+        elif direction == 'up':
+            return pipe_connections[from_cell]['up'] and pipe_connections[to_cell]['down']
+        elif direction == 'down':
+            return pipe_connections[from_cell]['down'] and pipe_connections[to_cell]['up']
+        return False
+    
+    def bfs(start):
+        queue = deque([start])
+        visited[start[0]][start[1]] = True
+        
+        while queue:
+            x, y = queue.popleft()
+            current = grid[x][y]
+            
+            for dx, dy, direction in [(0, 1, 'right'), (0, -1, 'left'), (1, 0, 'down'), (-1, 0, 'up')]:
+                nx, ny = x + dx, y + dy
+                if in_bounds(nx, ny) and not visited[nx][ny]:
+                    next_cell = grid[nx][ny]
+                    if can_connect(current, next_cell, direction):
+                        visited[nx][ny] = True
+                        queue.append((nx, ny))
+    
+    # Find the source
+    for i in range(rows):
+        for j in range(cols):
+            if grid[i][j] == '*':
+                source = (i, j)
+                break
+    
+    # Start BFS from the source
+    bfs(source)
+    
+    # Collect all connected sinks
+    connected_sinks = []
+    for i in range(rows):
+        for j in range(cols):
+            if grid[i][j] in "ABCDEFGHIJKLMNOPQRSTUVWXYZ" and visited[i][j]:
+                connected_sinks.append(grid[i][j])
+    
+    return connected_sinks
+
+# Read the grid from the input file
+file_path = '/Users/Downloads/pipe_input.txt'
+grid = read_input(file_path)
+
+# Find all connected sinks
+connected_sinks = get_connected_sinks(grid)
+print(connected_sinks)  # Output the result
