@@ -20,27 +20,7 @@ A sink may be connected to the source through another sink. For example, in the 
 Your objective is to write a function that determines which sinks are connected to the source in a given pipe system.
 
 <img width="108" alt="image" src="https://github.com/Nicoule/Cutie-Pipe-System/assets/130537195/6517458d-2af8-4b62-b351-bcdce2e27605">
-
-
-<img width="60" alt="image" src="https://github.com/Nicoule/Cutie-Pipe-System/assets/130537195/26e8568e-555c-47e4-ad3b-003facd98b3b">
-
-* ╣   ╔ ═ A
-  ╠ ═ ╝
-  C   ╚ ═ B
-
 Example: This pipe System connects the Sourse with two Sinks "A" and "B". The input used is as follows.
-
-* 0 2
-C 1 0
-╠ 1 1
-╣ 1 2
-═ 2 1
-╚ 3 0
-╝ 3 1
-╔ 3 2
-═ 4 0
-═ 4 2
-B 5 0
-A 5 2
+<img width="60" alt="image" src="https://github.com/Nicoule/Cutie-Pipe-System/assets/130537195/26e8568e-555c-47e4-ad3b-003facd98b3b">
 
 Now, please download the pipe_input.txt and test your code. It's a more complicated pipe system. The output should be like ['A', 'B', 'C']. Wish you luck!
