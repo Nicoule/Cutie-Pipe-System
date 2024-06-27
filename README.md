@@ -18,3 +18,23 @@ Treat the source and sinks as having pipe openings at all of their edges. For ex
 A sink may be connected to the source through another sink. For example, in the simple pipe system '* ╦ X Y ═ Z', all three sinks are connected to the source.
 
 Your objective is to write a function that determines which sinks are connected to the source in a given pipe system.
+
+
+* ╣   ╔ ═ A
+  ╠ ═ ╝
+  C   ╚ ═ B
+
+
+
+* 0 2
+C 1 0
+╠ 1 1
+╣ 1 2
+═ 2 1
+╚ 3 0
+╝ 3 1
+╔ 3 2
+═ 4 0
+═ 4 2
+B 5 0
+A 5 2
