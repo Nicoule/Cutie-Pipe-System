@@ -28,7 +28,7 @@ Your objective is to write a function that determines which sinks are connected 
   ╠ ═ ╝
   C   ╚ ═ B
 
-
+Example: This pipe System connects the Sourse with two Sinks "A" and "B". The input used is as follows.
 
 * 0 2
 C 1 0
@@ -42,3 +42,5 @@ C 1 0
 ═ 4 2
 B 5 0
 A 5 2
+
+Now, please download the pipe_input.txt and test your code. It's a more complicated pipe system. The output should be like ['A', 'B', 'C']. Wish you luck!
